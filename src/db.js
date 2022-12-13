@@ -31,3 +31,44 @@ export async function getUsers(request, response) {
     response.status(200).json(results.rows)
   })
 }
+
+export async function query(q, v = []) {
+  const client = await pool.connect();
+
+  try {
+    const result = await client.query(q, v);
+    return result.rows;
+  } catch (e) {
+    throw new Error(e);
+  } finally {
+    client.release();
+  }
+}
+
+export async function findById(id) {
+  const q = 'SELECT * FROM users WHERE id = $1';
+
+  try {
+    const result = await query(q, [id]);
+
+    if (result.length === 1) {
+      return result[0];
+    }
+  } catch (e) {
+    console.error('Gat ekki fundið notanda eftir id');
+  }
+
+  return null;
+}
+
+export async function findByUsername(username) {
+  const q = 'SELECT * FROM users WHERE username = $1';
+
+  try {
+    const result = await query(q, [username]);
+    return result[0];
+  } catch (e) {
+    console.error('Gat ekki fundið notanda eftir notendnafni');
+    return null;
+  }
+}

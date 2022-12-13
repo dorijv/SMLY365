@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <title>Undirskriftalisti</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1 class="header__Title"><%= title %></h1>
+    </div>
+    <div class="login__Form">
+        <form method="post" action="/admin/login" autocomplete="off" class="login__Div">
+            <label class="login__Row">
+                <p>Notendanafn</p>
+                <input class="input" id="username" type="text" name="username" >
+            </label>
+            <label class="login__Row">
+                <p>Lykilorð</p>
+                <input class="input" id="password" type="password" name="password"  >
+            </label>
+            <div class="login__Button">
+                <button>Innskrá</button>
+            </div>
+        </form>
+        <% if (message) { %>
+            <div class="errors">
+              <p><%= message %></p>
+            </div>
+          <% } %>
+    <a href="/">Til baka</a>
+    </div>
+</body>

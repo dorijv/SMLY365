@@ -1,7 +1,12 @@
 import express from 'express';
+import session from 'express-session';
 import dotenv from 'dotenv';
 import pg from 'pg';
 import bodyParser from 'body-parser';
+import passport from './auth.js';
+
+import { getUsers, findByUsername } from './db.js';
+import { router } from './router.js';
 
 dotenv.config();
 const app = express();
@@ -16,6 +21,14 @@ if (!sessionSecret) {
   process.exit(1);
 }
 
+app.use(session({
+  secret: sessionSecret,
+  resave: false,
+  saveUninitialized: false,
+  maxAge: 30 * 24 * 60 * 1000,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 console.log(process.env)
 
 app.use(bodyParser.json())
@@ -25,13 +38,6 @@ app.use(
   })
 )
 
-app.use(session({
-  secret: sessionSecret,
-  resave: false,
-  saveUninitialized: false,
-  maxAge: 30 * 24 * 60 * 1000,
-}));
-
 const viewsPath = new URL('./views', import.meta.url).pathname;
 
 app.use(express.static('public'));
@@ -39,11 +45,10 @@ app.use(express.static('src'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (request, response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API' })
-})
+app.set('./views', viewsPath);
+app.set('view engine', 'ejs');
 
-app.get('/users', db.getUsers)
+app.use('/', router);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)

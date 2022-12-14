@@ -9,17 +9,17 @@
     <div class="header">
         <h1 class="header__Title"><%= title %></h1>
     </div>
-    <div class="login__Form">
-        <form method="post" action="/admin/login" autocomplete="off" class="login__Div">
-            <label class="login__Row">
+    <div class="signup__Form">
+        <form method="post" action="/signup" autocomplete="off" class="signup__Div">
+            <label class="signup__Row">
                 <p>Notendanafn</p>
                 <input class="input" id="username" type="text" name="username" >
             </label>
-            <label class="login__Row">
+            <label class="signup__Row">
                 <p>Lykilorð</p>
                 <input class="input" id="password" type="password" name="password"  >
             </label>
-            <div class="login__Button">
+            <div class="signup__Button">
                 <button>Innskrá</button>
             </div>
         </form>
@@ -28,9 +28,9 @@
               <p><%= message %></p>
             </div>
           <% } %>
-    <a href="/">Til baka</a>
-    <div>
-        <p>Vantar þig aðgang? <a href="/signup">Búa til aðgang</a></p>
-    </div>
+        <a href="/">Til baka</a>
+        <div>
+            <p> Átt þú nú þegar aðgang? <a href="/login">Innskráning</a></p>
+        </div>
     </div>
 </body>

@@ -1,0 +1,11 @@
+<%- include('header') -%>  
+<p> To deposit funds into your account: </p>
+<p> 1. Send SMLY coins to this address: BKwDpZ7qeHv2vUPXzSPWW9KFiuMvrt7u7T </p>
+<p> 2. Submit the hash: </p>
+
+<form method="post" action="addfunds" autocomplete="off">
+    <label> HASH: </label>
+    <input class="input" id="hash" type="hash" name="hash">
+    <button class="btn btn-info ">Verify Hash</button>
+</form>
+<%- include('footer') -%>

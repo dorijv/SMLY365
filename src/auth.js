@@ -1,6 +1,7 @@
 import { Strategy } from 'passport-local';
 import passport from 'passport';
 import { comparePasswords } from './utils.js';
+import { findByUsername, findById } from './db.js';
 
 async function strat(username, password, done) {
   try {

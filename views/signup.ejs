@@ -3,7 +3,7 @@
     <h1><%= title %></h1>
 </div>
 <div class="text-success">
-    <form method="post" action="login" autocomplete="off">
+    <form method="post" action="signup" autocomplete="off">
         <label>
             <p>Username</p>
             <input class="input" id="username" type="text" name="username">
@@ -13,16 +13,22 @@
             <input class="input" id="password" type="password" name="password">
         </label>
         <div>
-            <button class="btn btn-info ">Login</button>
+            <button class="btn btn-info ">Create Account</button>
         </div>
     </form>
-    <form method="get" action="/signup">
-        <button class="btn btn-outline-info">Sign up!</button>
+    <form method="get" action="/">
+        <button class="btn btn-outline-info">Cancel</button>
     </form>
-    <% if (message) { %>
+    <% if (data.bool) { %>
         <div class="errors">
-          <p><%= message %></p>
+            <ul>
+                <% for (let i = 0; i < data.errorMessages.length; i++){ %>
+                  <div class="villa">
+                  <li><%= data.errorMessages[i] %> </li>
+                  </div>
+                <% } %>
+            </ul>
         </div>
-      <% } %>     
+      <% } %>
 </div>
 <%- include('footer') -%>

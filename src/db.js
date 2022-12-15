@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import pg from 'pg';
+import bcrypt from 'bcrypt'
 
 dotenv.config();
 
@@ -71,4 +72,34 @@ export async function findByUsername(username) {
     console.error('Gat ekki fundið notanda eftir notendnafni');
     return null;
   }
+}
+
+export async function createUser(data) {
+  const q = 'INSERT INTO users(username, password, admin, smlycoins) VALUES ($1, $2, $3, $4)';
+  const values = [data.username, bcrypt.hashSync(data.password, 10), 0, 0];
+
+  try {
+    await query(q, values);
+  } catch (e) {
+    console.error('Error', e);
+    return 'error';
+  }
+
+  return null;
+}
+
+export async function updateBalance(data) {
+  const q = 'UPDATE USERS SET smlycoins = smlycoins + $1 WHERE username like $2';
+  const values = [data.bet_amount, data.username];
+
+  console.info(values);
+
+  try {
+    await query(q, values);
+  } catch (e) {
+    console.error('Error', e);
+    return 'error'
+  }
+
+  return null;
 }

@@ -1,0 +1,29 @@
+<%- include('header') -%>
+<div>
+    <% if(locals.user) { %>
+    <p>Signed in as: <%= locals.user.username %></p>
+    <p>Current balance: <%= locals.user.smlycoins %> SMLY</p> 
+    <% } %>
+
+    <a href='/addfunds'>Add funds!</a>
+    <p> A random number between 1 and 10 will be generated </p>
+    <form method="post">
+    	<label> Bet: </label>
+    	<input type="number" name="bet_amount">
+    	<input type="submit" name="button_pressed" value="Less than 5" />
+		<input type="submit" name="button_pressed" value="More than 5" />
+    </form>
+</div>
+
+<% if (errors.error) { %>
+	<div class="results">
+		<p><%= errors.error %></p>
+	</div>
+<% } else if (data) { %>
+	<div class="results">
+		<p><%= data.number_generated %></p>
+	</div>
+<% } %>
+
+
+<%- include('footer') -%>

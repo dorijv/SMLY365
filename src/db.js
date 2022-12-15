@@ -103,3 +103,31 @@ export async function updateBalance(data) {
 
   return null;
 }
+
+export async function findByHash(hash) {
+  const q = 'SELECT * FROM hashes WHERE hash = $1';
+
+  try {
+    const result = await query(q, [hash]);
+    return result[0];
+  } catch (e) {
+    console.error('Gat ekki fundið notanda eftir notendnafni');
+    return null;
+  }
+}
+
+export async function appendFunds(data) {
+  await updateBalance(data);
+
+  const q = 'INSERT INTO hashes(hash, username, amount) VALUES ($1, $2, $3)';
+  const values = [data.hash, data.username, data.amount];
+
+  try {
+    await query(q, values);
+  } catch (e) {
+    console.error('Error', e);
+    return 'error';
+  }
+
+  return null;
+}

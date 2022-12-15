@@ -5,3 +5,9 @@ CREATE TABLE IF NOT EXISTS users (
  admin int,
  smlycoins decimal
 );
+
+CREATE TABLE IF NOT EXISTS hashes (
+ hash character varying(255) PRIMARY KEY,
+ username character varying(255) NOT NULL,
+ amount decimal
+);

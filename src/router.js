@@ -1,6 +1,7 @@
 import express from 'express';
 import { catchErrors } from './utils.js';
 export const router = express.Router();
+import fetch from 'node-fetch';
 import passport, { ensureLoggedIn } from './auth.js';
 import { createNewUser, validations, sanitizations, showErrors } from './registration.js';
 import { updateBalance, findByHash, appendFunds } from './db.js';

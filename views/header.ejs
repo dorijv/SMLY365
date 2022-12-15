@@ -8,5 +8,8 @@
 <header>
     <h2>SMLY365</h2>
     <p>Your totally legal gambling website!</p>
+    <% if(locals.user) { %>
+    <a href='/logout'> Sign out! </a>
+    <% } %>
 </header>
 <body>

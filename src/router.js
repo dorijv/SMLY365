@@ -56,7 +56,8 @@ async function bet(req, res) {
   const data = {
     number_generated,
     bet_amount: req.body.bet_amount,
-    button_pressed: req.body.button_pressed
+    button_pressed: req.body.button_pressed,
+    win: 'You won!'
   }
 
   const errors = {
@@ -88,6 +89,7 @@ async function bet(req, res) {
     // Notandi tapar!
     console.info('casino won');
     bet_amount = -bet_amount;
+    data.win = 'You lost! :('
   }
 
   await updateBalance({ username, bet_amount })

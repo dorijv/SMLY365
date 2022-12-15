@@ -1,10 +1,10 @@
 <%- include('header') -%>
 <% if(!error) { %>
-    <h1>Gat ekki skráð!</h1>
-    <p class="errorText">Hefur þú skrifað undir áður?</p>
-    <a href="/"><button>Til baka</button></a>
+    <h1>Ooopsie Boopsie</h1>
+    <p class="errorText">Account already exists</p>
+    <a href="/"><button>Return</button></a>
 <%} else { %>
     <p class="errorText"> <%= error %></p>
-    <a href="/"><button>Til baka</button></a>
+    <a href="/"><button>Return</button></a>
 <% } %>
 <%- include('footer') -%>
